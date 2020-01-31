@@ -90,6 +90,7 @@ button {
   color: #8d36b8;
   font-weight: 600;
   font-size: 0.7em;
+  border-radius: 0px 0px 4px 4px;
 
   border-top: 1px solid #ddd;
   text-transform: uppercase;
