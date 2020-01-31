@@ -9,6 +9,10 @@
   );
 }
 
+main {
+  margin: 0;
+}
+
 h1 {
   color: #fffeff;
   padding: 70px 50px 0 0;
@@ -27,9 +31,8 @@ h2 {
   justify-content: space-between;
   align-items: baseline;
   border: 1px solid #eee;
-  margin: 30px 10px;
   padding: 15px;
-  margin: 50px 5%;
+  margin: 30px 5%;
 
   font-size: 0.6em;
   font-weight: bold;
@@ -47,6 +50,7 @@ input {
   border: 1px solid #ddd;
   width: 75%;
   margin-right: 3px;
+  outline: none;
 }
 
 .cards {
