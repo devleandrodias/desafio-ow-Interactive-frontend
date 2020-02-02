@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <app-toolbar />
+    <app-header />
     <app-main />
     <app-footer />
   </div>
 </template>
 
 <script>
-import Toolbar from "./components/templates/Toolbar";
+import Header from "./components/templates/Header";
 import Main from "./components/templates/Main";
 import Footer from "./components/templates/Footer";
 
 export default {
   components: {
-    appToolbar: Toolbar,
+    appHeader: Header,
     appMain: Main,
     appFooter: Footer
   }
