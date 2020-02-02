@@ -1,7 +1,13 @@
 <template>
-  <div class="product">Páginas de produtos</div>
+  <app-card-product />
 </template>
 
 <script>
-export default {};
+import CardProduct from "../components/widgets/CardProduct";
+
+export default {
+  components: {
+    appCardProduct: CardProduct
+  }
+};
 </script>

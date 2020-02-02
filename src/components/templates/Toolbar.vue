@@ -21,6 +21,7 @@ export default {};
 header {
   background-color: #fffeff;
   height: 10vh;
+  margin-bottom: 25px;
   z-index: 1;
   -webkit-box-shadow: 0px 1px 9px -1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 1px 9px -1px rgba(0, 0, 0, 0.75);

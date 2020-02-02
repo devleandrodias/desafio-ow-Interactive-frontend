@@ -26,17 +26,18 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  outline: 0;
+  box-sizing: border-box;
 }
 
-body {
+html #app {
   font-family: "Source Sans Pro", sans-serif;
-}
-
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+}
+
+button {
+  cursor: pointer;
 }
 </style>
