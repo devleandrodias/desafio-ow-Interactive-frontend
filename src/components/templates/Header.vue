@@ -6,7 +6,9 @@
         <span class="logo-destaque">Place</span>
       </span>
       <div class="shopping">
-        <a href="#">Produtos</a>
+        <router-link to="/cart" exact>
+          <a>Produtos</a>
+        </router-link>
         <!-- <img src="../../../assets/shopping-cart.svg" alt="shopping-cart" height="30px" /> -->
       </div>
     </div>
@@ -39,7 +41,7 @@ a {
     align-items: center;
     justify-content: space-between;
     height: 100%;
-    margin: 0 15%;
+    margin: 0 10%;
   }
 }
 

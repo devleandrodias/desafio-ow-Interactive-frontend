@@ -40,7 +40,6 @@ export default {
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 20px;
     height: 123px;
-    /* margin: 0 15%; */
   }
 }
 

@@ -13,7 +13,7 @@ export default {};
   main {
     background-color: #fffeff;
     height: 80vh;
-    margin: auto 15%;
+    margin: auto 10%;
     overflow-x: hidden;
     overflow-y: scroll;
   }
