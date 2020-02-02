@@ -23,9 +23,9 @@ header {
   height: 10vh;
   margin-bottom: 25px;
   z-index: 1;
-  -webkit-box-shadow: 0px 1px 9px -1px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 1px 9px -1px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 1px 9px -1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.75);
 }
 
 a {
