@@ -1,10 +1,10 @@
 <template>
   <header>
     <div class="header-main">
-      <span class="logo">
+      <router-link to="/" exact class="logo">
         Mkt
         <span class="logo-destaque">Place</span>
-      </span>
+      </router-link>
       <div class="shopping">
         <router-link to="/cart" exact>
           <a>Produtos</a>
@@ -32,7 +32,7 @@ header {
 a {
   text-decoration: none;
   color: #7a7a7a;
-  font-size: 0.8em;
+  font-size: 0.9em;
   font-weight: 700;
 }
 @media (min-width: 700px) {

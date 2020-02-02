@@ -11,18 +11,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr v-for="product in dataArrayProducts" :key="product">
           <td>
-            <!-- <img
-            src="../../../assets/garbage.svg"
-            alt="shopping-cart"
-            height="15px"
-            style="cursor: pointer;"
-            />-->
+            <img src="https://i.ibb.co/B4xmk45/1.jpg" alt="shopping-cart" height="15px" />
           </td>
           <td class="product">
-            <span class="category">Eletrônicos</span>
-            <span class="product-item">Notebook Acer Aspire 3 A315</span>
+            <span class="category">{{product.category}}</span>
+            <span class="product-item">{{product.name}}</span>
           </td>
           <td>
             <div class="buttons-calculator">
@@ -31,44 +26,27 @@
               <button class="button-more-less button-more" type="button">+</button>
             </div>
           </td>
-
           <td class="money">
-            <strong>R$1.500,00</strong> à vista
-            <br />ou 10X R$150,00
-          </td>
-          <td class="money">
-            <strong>R$1.500,00</strong> à vista
-            <br />ou 10X R$150,00
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <!-- <img
-            src="../../../assets/garbage.svg"
-            alt="shopping-cart"
-            height="15px"
-            style="cursor: pointer;"
-            />-->
-          </td>
-          <td class="product">
-            <span class="category">Eletrônicos</span>
-            <span class="product-item">Notebook Acer Aspire 3 A315</span>
-          </td>
-          <td>
-            <div class="buttons-calculator">
-              <button class="button-more-less button-less" type="button">-</button>
-              <input class="value-total" type="number" value="01" />
-              <button class="button-more-less button-more" type="button">+</button>
-            </div>
-          </td>
-
-          <td class="money">
-            <strong>R$1.500,00</strong> à vista
-            <br />ou 10X R$150,00
+            <strong>
+              R${{
+              sightValueUnit
+              }}
+            </strong> à vista
+            <br />
+            ou {{quantityParcel}}x R${{
+            parcelValueUnit
+            }}
           </td>
           <td class="money">
-            <strong>R$1.500,00</strong> à vista
-            <br />ou 10X R$150,00
+            <strong>
+              R${{
+              sightValue
+              }}
+            </strong> à vista
+            <br />
+            ou {{quantityParcel}}x R${{
+            parcelValue
+            }}
           </td>
         </tr>
       </tbody>
@@ -77,20 +55,21 @@
           <td></td>
           <td></td>
           <td></td>
-          <td class="transform-up">Total a vista</td>
-          <td class="price-total">R$30000</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td class="transform-up">Total Parcelado</td>
-          <td class="value-parceled">
-            em até
-            <strong>
-              10x R$300,00
-              <br />(Total R$3000,00)
-            </strong>
+          <td class="transform-up">
+            Total a vista
+            <br />Total Parcelado
+          </td>
+          <td class="price-total">
+            R${{valueTotal}}
+            <br />
+            <div class="value-parceled">
+              em até
+              <strong>
+                {{quantityParcel}}x R${{valueTotalParcel}}
+                <br />
+                (Total R${{valueTotal}})
+              </strong>
+            </div>
           </td>
         </tr>
       </tfoot>
@@ -113,10 +92,15 @@
   </div>
 </template>
 
-
-
 <script>
-export default {};
+export default {
+  props: {
+    dataArrayProducts: {
+      type: Array,
+      required: true
+    }
+  }
+};
 </script>
 
 <style>
@@ -136,6 +120,14 @@ td {
   padding: 10px;
 }
 
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 .buttons-calculator {
   display: flex;
   align-items: center;
@@ -144,11 +136,10 @@ td {
 
 .value-total {
   width: 40px;
-  height: 30px;
+  height: 35px;
   border: 0.5px solid #bbbbbb;
   background-color: #fffeff;
-  padding: 2px;
-  text-align: right;
+  text-align: center;
 }
 
 .button-more-less {
@@ -238,6 +229,7 @@ td {
 
 .continue {
   background-color: #cfcfcf;
+  color: black;
 }
 
 .finnaly {
@@ -252,7 +244,9 @@ td {
 }
 
 .value-parceled {
-  font-size: 0.7em;
+  font-size: 0.8em;
+  color: black;
+  margin-top: 15px;
 }
 
 .clean-cart-text {
