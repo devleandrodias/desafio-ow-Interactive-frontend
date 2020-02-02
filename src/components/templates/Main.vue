@@ -14,6 +14,8 @@ export default {};
     background-color: #fffeff;
     height: 80vh;
     margin: auto 15%;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 }
 @media (max-width: 700px) {

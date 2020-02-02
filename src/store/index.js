@@ -5,13 +5,22 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products: [
-      { name: null, price: null, picrute: null }
-    ]
+    products: []
   },
   mutations: {
+    setProductsStore(state, payload) {
+      state.products.push(payload);
+    }
   },
   actions: {
+    setProductsStore({ commit }, payload) {
+      commit('setProductsStore', payload);
+    },
+  },
+  getters: {
+    getProducts(state) {
+      return state.products[0];
+    }
   },
   modules: {
   }

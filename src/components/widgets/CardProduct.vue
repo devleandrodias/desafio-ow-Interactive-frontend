@@ -1,13 +1,11 @@
 <template>
-  <div class="cards">
-    <div class="card">
-      <img :src="imageUrl" />
-      <span class="category">{{category}}</span>
-      <span class="product">{{product}}</span>
-      <p class="description">{{description}}</p>
-      <span class="price">R${{price}}</span>
-      <button>Adicionar ao carrinho</button>
-    </div>
+  <div class="card">
+    <img :src="imageUrl" />
+    <span class="category">{{category}}</span>
+    <span class="product">{{product}}</span>
+    <p class="description">{{description}}</p>
+    <span class="price">R${{price}}</span>
+    <button>Adicionar ao carrinho</button>
   </div>
 </template>
 
@@ -45,24 +43,6 @@ export default {
 </script>
 
 <style>
-@media (min-width: 700px) {
-  .cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;
-    /* margin: 0 15%; */
-  }
-}
-
-@media (max-width: 700px) {
-  .cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    /* grid-gap: 20px; */
-    /* margin: 0 15%; */
-  }
-}
-
 .card {
   display: flex;
   flex-direction: column;
@@ -77,6 +57,7 @@ export default {
 img {
   align-self: center;
   width: 100%;
+  padding: 20px;
 }
 
 button {
@@ -95,7 +76,7 @@ button {
   border-top: 1px solid #ddd;
   text-transform: uppercase;
   cursor: pointer;
-  transition: 0.4s ease-out;
+  transition: 0.3s ease-out;
   outline: none;
 }
 
@@ -103,7 +84,7 @@ button:hover {
   color: #fffeff;
   border-top: 1px solid #8d36b8;
   background-color: #8d36b8;
-  transition: 0.4s ease-in;
+  transition: 0.3s ease-in;
   outline: none;
 }
 
