@@ -12,15 +12,15 @@ export default {};
 @media (min-width: 700px) {
   main {
     background-color: #fffeff;
-    margin: 0 15%;
-    height: auto;
+    height: 80vh;
+    margin: auto 15%;
   }
 }
 @media (max-width: 700px) {
   main {
     background-color: #fffeff;
-    margin: 0 5%;
-    height: auto;
+    margin: auto 5%;
+    height: 80vh;
     overflow: scroll;
   }
 }

@@ -30,11 +30,14 @@ export default {
   box-sizing: border-box;
 }
 
-html #app {
+#app {
   font-family: "Source Sans Pro", sans-serif;
-  height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10vh 80vh 10vh;
 }
 
 button {
