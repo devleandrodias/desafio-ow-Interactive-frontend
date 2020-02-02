@@ -34,13 +34,24 @@ a {
   font-size: 0.8em;
   font-weight: 700;
 }
+@media (min-width: 700px) {
+  .header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0 15%;
+  }
+}
 
-.header-main {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  margin: 0 15%;
+@media (max-width: 700px) {
+  .header-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0 5%;
+  }
 }
 
 .logo {

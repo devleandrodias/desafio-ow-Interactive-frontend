@@ -9,9 +9,18 @@ export default {};
 </script>
 
 <style>
-main {
-  background-color: #fffeff;
-  margin: 0 15%;
-  height: auto;
+@media (min-width: 700px) {
+  main {
+    background-color: #fffeff;
+    margin: 0 15%;
+    height: auto;
+  }
+}
+@media (max-width: 700px) {
+  main {
+    background-color: #fffeff;
+    margin: 0 5%;
+    height: auto;
+  }
 }
 </style>
