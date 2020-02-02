@@ -1,7 +1,12 @@
 <template>
-  <div class="checkout">Página de cadastro usuário</div>
+  <form-checkout />
 </template>
 
 <script>
-export default {};
+import FormCheckout from "../components/forms/FormCheckout";
+export default {
+  components: {
+    formCheckout: FormCheckout
+  }
+};
 </script>
