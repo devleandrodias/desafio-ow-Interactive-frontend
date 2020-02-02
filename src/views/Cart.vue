@@ -1,9 +1,15 @@
 <template>
-  <div class="cart">Página do carrinho</div>
+  <app-shopping-cart />
 </template>
 
 <script>
-export default {};
+import ShoppingCart from "../components/widgets/ShoppingCart";
+
+export default {
+  components: {
+    appShoppingCart: ShoppingCart
+  }
+};
 </script>
 
 <style>

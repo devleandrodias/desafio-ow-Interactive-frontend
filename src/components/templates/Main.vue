@@ -21,6 +21,7 @@ export default {};
     background-color: #fffeff;
     margin: 0 5%;
     height: auto;
+    overflow: scroll;
   }
 }
 </style>

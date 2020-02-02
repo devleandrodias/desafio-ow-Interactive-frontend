@@ -1,7 +1,5 @@
 <template>
-  <div class>
-    <app-card-product />
-  </div>
+  <app-card-product />
 </template>
 
 <script>
