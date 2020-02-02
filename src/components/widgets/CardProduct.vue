@@ -1,23 +1,47 @@
 <template>
   <div class="cards">
     <div class="card">
-      <!-- <img src="../../../images/imac.jpg" alt srcset /> -->
-      <span class="category">Eletrônicos</span>
-      <span class="product">Notebook Acer Aspire 3 A315</span>
-      <p class="description">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text
-        ever since the 1500s, when an unknown printer took a galley of
-        type and scrambled it to make
-      </p>
-      <span class="price">R$1.500,00</span>
+      <img :src="imageUrl" />
+      <span class="category">{{category}}</span>
+      <span class="product">{{product}}</span>
+      <p class="description">{{description}}</p>
+      <span class="price">R${{price}}</span>
       <button>Adicionar ao carrinho</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    imageUrl: {
+      type: String,
+      required: true,
+      default:
+        "https://fistiktekstil.com/blog/wp-content/uploads/2019/12/img.jpg"
+    },
+    category: {
+      type: String,
+      required: true,
+      default: ""
+    },
+    product: {
+      type: String,
+      required: true,
+      default: ""
+    },
+    description: {
+      type: String,
+      required: true,
+      default: ""
+    },
+    price: {
+      type: String,
+      required: true,
+      default: "0"
+    }
+  }
+};
 </script>
 
 <style>
@@ -52,7 +76,7 @@ export default {};
 
 img {
   align-self: center;
-  max-width: 250px;
+  width: 100%;
 }
 
 button {

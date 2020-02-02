@@ -5,6 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    products: [
+      { name: null, price: null, picrute: null }
+    ]
   },
   mutations: {
   },
