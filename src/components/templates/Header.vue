@@ -5,13 +5,19 @@
         Mkt
         <span class="logo-destaque">Place</span>
       </router-link>
-      <div class="shopping">
-        <router-link to="/cart" exact>
+      <router-link to="/cart" exact>
+        <div class="shopping-cart-itens">
           <a>Produtos</a>
-          <div class="circle quantity-item" v-show="quantityItens > 0">{{quantityItens}}</div>
-        </router-link>
-        <!-- <img src="@/assets/shopping-cart.svg" alt="shopping-cart" height="30px" /> -->
-      </div>
+          <div class="logo-itens">
+            <img
+              src="../../../static/assets/shopping-cart.svg"
+              alt="shopping-cart"
+              class="cart-icon"
+            />
+            <div class="circle quantity-item" v-show="quantityItens > 0">{{quantityItens}}</div>
+          </div>
+        </div>
+      </router-link>
     </div>
   </header>
 </template>
@@ -38,14 +44,25 @@ header {
   box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.75);
 }
 
+.logo-itens {
+  display: flex;
+  align-items: flex-end;
+}
+
+.cart-icon {
+  padding: 5px;
+  padding-left: 15px;
+}
+
 .circle {
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
+  padding: 1px 6px;
   border-radius: 50%;
   background-color: #d33b3b;
 
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
 }
 
@@ -89,10 +106,10 @@ a {
   color: #8d36b8;
 }
 
-.shopping {
+.shopping-cart-itens {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: baseline;
+  justify-content: end;
 }
 </style>

@@ -113,7 +113,7 @@
           <div class="product-item" v-for="product in dataArrayProducts" :key="product">
             {{setPriceItem(product.price)}}
             <div class="category-product">{{product.category}}</div>
-            <div class="name-producr">{{product.name}}</div>
+            <div class="name-product">{{product.name}}</div>
             <div class="quantity-itens-product">
               <div class="buttons-calculator">
                 <button
@@ -128,17 +128,45 @@
                   @click="setUpdateQuantityItens(dataArrayProducts.indexOf(product), (product.quantity + 1))"
                 >+</button>
               </div>
-            </div>
-            <div class="sight-value-unit-product">{{product.price}}</div>
-            <div class="parceled-value-unit-product">R${{parcelValueUnit(product.quantity)}}</div>
-            <div class="sight-value-total-product">R${{sightValue(product.quantity)}}</div>
-            <div class="parceled-value-total-product">R${{parcelValue(product.quantity)}}</div>
+            </div>Valor Unitário
             <hr />
+            <div class="sight-value-unit-product">
+              <span>
+                Valor a vista
+                <strong>R${{product.price}}</strong>
+              </span>
+            </div>
+            <div class="parceled-value-unit-product">
+              <span>
+                Valor parcelado em
+                <strong>10X R${{parcelValueUnit(product.quantity)}}</strong>
+              </span>
+            </div>Valor Total
+            <hr />
+            <div class="sight-value-total-product">
+              <span>
+                Valor total a vista
+                <strong>R${{sightValue(product.quantity)}}</strong>
+              </span>
+            </div>
+            <div class="parceled-value-total-product">
+              <span>
+                Valor total em
+                <strong>
+                  10X
+                  R${{parcelValue(product.quantity)}}
+                </strong>
+              </span>
+            </div>
           </div>
           <div class="sight-value-total-products">Valor total da compra</div>
           <div class="parceled-value-total-products">Valor total da compra parcelado</div>
         </div>
-        <span class="clean-cart-text" @click="cleanProductsShoppingCart()">Limpar carrinho</span>
+        <div class="buttons-continue-finnaly">
+          <button class="button continue" @click="cleanProductsShoppingCart()">Limpar carrinho</button>
+          <router-link to="/" exact tag="button" class="button continue">Continuar comprando</router-link>
+          <router-link to="/checkout" exact tag="button" class="button finnaly">Concluir compra</router-link>
+        </div>
       </div>
       <div class="card-empty" v-else>
         <span>Carrinho Vazio</span>
@@ -190,20 +218,54 @@ export default {
   },
   computed: {
     getValueTotal() {
-      console.log(this.$store.getters.getValueTotal);
       return this.$store.getters.getValueTotal;
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 /**
-  Mobile
+  Mobile 
  */
 .card {
   background-color: #fffeff;
+  padding: 10px;
 }
+
+.product-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 0.5px solid #cfcfcf;
+  -webkit-box-shadow: 0px 0px 25px -20px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 25px -20px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 25px -20px rgba(0, 0, 0, 0.75);
+}
+
+.category-product {
+  color: #8d36b8;
+  font-size: 1em;
+  padding: 5px 5px 0px 5px;
+}
+
+.name-product {
+  text-align: justify;
+  padding: 5px;
+}
+
+span {
+  font-weight: 100;
+}
+
+strong {
+  font-size: 0.8em;
+}
+
+hr {
+  border: 0.5px solid #cfcfcf;
+}
+
 /**
   Grid
   */
@@ -350,6 +412,7 @@ input[type="number"] {
 .button {
   padding: 15px 75px;
   border: none;
+  width: 100%;
   border-radius: 3px;
   margin: 5px;
   outline: none;
@@ -358,7 +421,7 @@ input[type="number"] {
 
 .continue {
   background-color: #cfcfcf;
-  color: black;
+  color: #5e5e5e;
 }
 
 .finnaly {
