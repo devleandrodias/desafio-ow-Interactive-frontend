@@ -16,11 +16,13 @@
             <tr v-for="product in dataArrayProducts" :key="product">
               {{setPriceItem(product.price)}}
               <td>
-                <!-- <img src="https://i.ibb.co/B4xmk45/1.jpg" alt="shopping-cart" height="15px" /> -->
+                <img src="../../../static/assets/garbage.svg" alt="garbage" />
               </td>
-              <td class="product">
-                <span class="category">{{product.category}}</span>
-                <span class="product-item">{{product.name}}</span>
+              <td class="td-itens">
+                <div class="group-itens">
+                  <span class="category-grid">{{product.category}}</span>
+                  <span class="product-item-grid">{{product.name}}</span>
+                </div>
               </td>
               <td>
                 <div class="buttons-calculator">
@@ -29,7 +31,7 @@
                     type="button"
                     @click="quantityItems > 1 && quantityItems--"
                   >-</button>
-                  <input class="value-total" type="number" :value="quantityItems" disabled />
+                  <input class="value-total" type="number" :value="1" disabled />
                   <button
                     class="button-more-less button-more"
                     type="button"
@@ -37,27 +39,31 @@
                   >+</button>
                 </div>
               </td>
-              <td class="money">
+              <td class="td-itens">
                 <strong>
-                  R${{
+                  R$
+                  {{
                   product.price
                   }}
                 </strong> à vista
-                <br />
-                ou {{quantityParcel}}x R${{
+                <br />ou
+                <strong>{{quantityParcel}}x R$2.234,25</strong>
+                <!-- {{
                 parcelValueUnit
-                }}
+                }}-->
               </td>
-              <td class="money">
+              <td class="td-itens">
                 <strong>
-                  R${{
+                  R$12.245,97
+                  <!-- {{
                   sightValue
-                  }}
+                  }}-->
                 </strong> à vista
-                <br />
-                ou {{quantityParcel}}x R${{
+                <br />ou
+                <strong>{{quantityParcel}}x R$1.223,9</strong>
+                <!-- {{
                 parcelValue
-                }}
+                }}-->
               </td>
             </tr>
           </tbody>
@@ -67,18 +73,23 @@
               <td></td>
               <td></td>
               <td class="transform-up">
-                Total a vista
-                <br />Total Parcelado
+                <span class="margin-text">Total a vista</span>
+                <br />
+                <span class="margin-text">Total Parcelado</span>
               </td>
               <td class="price-total">
-                R${{getValueTotal}}
+                R$22.234,87
+                <!-- {{getValueTotal}} -->
                 <br />
                 <div class="value-parceled">
                   em até
                   <strong>
-                    {{quantityParcel}}x R${{valueTotalParcel}}
-                    <br />
-                    (Total R${{getValueTotal}})
+                    {{quantityParcel}}
+                    x R$1.123,34
+                    <!-- {{valueTotalParcel}} -->
+                    <br />(Total R$234,25
+                    <!-- {{getValueTotal}} -->
+                    )
                   </strong>
                 </div>
               </td>
@@ -87,13 +98,7 @@
         </table>
         <div class="display-footer">
           <div class="clean-cart">
-            <!-- <img
-            src="../../../assets/garbage.svg"
-            alt="shopping-cart"
-            height="15px"
-            style="cursor: pointer;"
-            />-->
-
+            <img src="../../../static/assets/garbage.svg" alt />
             <span class="clean-cart-text" @click="cleanProductsShoppingCart()">Limpar carrinho</span>
           </div>
           <div class="buttons-continue-finnaly">
@@ -121,7 +126,7 @@
                   type="button"
                   @click="quantityItems > 1 && quantityItems--"
                 >-</button>
-                <input class="value-total" type="number" @value="getQuantityItem" disabled />
+                <input class="value-total" type="number" :value="1" disabled />
                 <button
                   class="button-more-less button-more"
                   type="button"
@@ -233,6 +238,11 @@ export default {
   padding: 10px;
 }
 
+.product-item-grid {
+  width: 75%;
+  font-weight: 700;
+}
+
 .product-item {
   padding: 10px;
   margin-bottom: 10px;
@@ -259,7 +269,7 @@ span {
 }
 
 strong {
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 hr {
@@ -293,17 +303,38 @@ th {
   font-weight: 500;
 }
 
+img {
+  size: 100%;
+  padding: 0;
+  height: 20px;
+  width: 20px;
+}
+
+td:first-child {
+  width: 2%;
+  padding: 0;
+  text-align: center;
+}
+
 td {
   border-top: 1px solid #bbbbbb;
   padding: 10px;
+  width: 25%;
+  text-align: left;
 }
 
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+
 input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+
+.group-itens {
+  display: flex;
+  flex-direction: column;
 }
 
 .card-empty {
@@ -331,6 +362,10 @@ input[type="number"] {
   border: 0.5px solid #bbbbbb;
   background-color: #fffeff;
   text-align: center;
+}
+
+.buttons-continue-finnaly {
+  display: flex;
 }
 
 .button-more-less {
@@ -379,10 +414,14 @@ input[type="number"] {
 }
 
 .transform-up {
-  text-transform: uppercase;
-  font-size: 0.7em;
   text-align: right;
-  font-weight: 600;
+}
+
+.margin-text {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-weight: 700;
+  padding-bottom: 50px;
   padding: 25px;
 }
 
@@ -391,6 +430,13 @@ input[type="number"] {
   flex-direction: column;
   align-items: baseline;
   font-size: 0.8em;
+}
+
+.category-grid {
+  font-size: 0.9em;
+  font-weight: 700;
+  color: #8d36b8;
+  margin-bottom: 5px;
 }
 
 .category {
@@ -405,7 +451,7 @@ input[type="number"] {
   font-weight: 600;
 }
 
-.money {
+.td-itens {
   font-size: 1em;
 }
 
@@ -438,13 +484,19 @@ input[type="number"] {
 .value-parceled {
   font-size: 0.8em;
   color: black;
-  margin-top: 15px;
+}
+
+.clean-cart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .clean-cart-text {
-  font-size: 0.7em;
+  font-size: 0.9em;
   color: #777777;
-  font-weight: 500;
+  font-weight: 700;
+  margin-left: 15px;
   cursor: pointer;
 }
 </style>

@@ -55,14 +55,14 @@ header {
 }
 
 .circle {
-  height: 20px;
-  width: 20px;
-  padding: 1px 6px;
+  height: 13px;
+  width: 13px;
+  padding: 9px;
   border-radius: 50%;
   background-color: #d33b3b;
 
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
 }
 
