@@ -8,6 +8,7 @@
       <div class="shopping">
         <router-link to="/cart" exact>
           <a>Produtos</a>
+          <span v-show="quantityItens > 0">{{quantityItens}}</span>
         </router-link>
         <!-- <img src="../../../assets/shopping-cart.svg" alt="shopping-cart" height="30px" /> -->
       </div>
@@ -16,7 +17,15 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters({
+      quantityItens: "getQuantityItensCart"
+    })
+  }
+};
 </script>
 
 <style>

@@ -6,35 +6,27 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
-    productsShoppingCart: [
-      {
-        name: "Notebook Essentials E30 Intel Core I3 4GB 1TB LED Full HD 15.6'' W10 Cinza Titânio - Samsung",
-        price: "1.799,90",
-        picture: "https://i.ibb.co/B4xmk45/1.jpg",
-        category: "Eletrônicos"
-      }
-      // {
-      //   category: 'Eletrônico',
-      //   productItem: 'Notebook',
-      //   sightValueUnit: null,
-      //   sightValue: null,
-      //   parcelValueUnit: null,
-      //   parcelValue: null,
-      //   quantityParcel: null,
-      //   valueTotal: null,
-      //   valueTotalParcel: null
-      // }
-    ]
+    productsShoppingCart: []
   },
   mutations: {
-    setProductsStore(state, payload) {
-      state.products.push(payload);
-    }
+    setProductsStore({ products }, payload) {
+      products.push(payload);
+    },
+    setProductsShoppingCart({ productsShoppingCart }, payload) {
+      productsShoppingCart.push(payload);
+    },
   },
   actions: {
     setProductsStore({ commit }, payload) {
       commit('setProductsStore', payload);
     },
+    setProductsShoppingCart({ commit }, payload) {
+      const itemCart = this.state.productsShoppingCart.find(product => product.name == payload.name);
+
+      if (!itemCart)
+        commit('setProductsShoppingCart', payload);
+      // this.state.productsShoppingCart[itemCarts.indexOf(itemCart)] = { ...itemCart }
+    }
   },
   getters: {
     getProducts({ products }) {
@@ -42,6 +34,12 @@ export default new Vuex.Store({
     },
     getProductsShoppingCart({ productsShoppingCart }) {
       return productsShoppingCart;
+    },
+    getItensCart({ productsShoppingCart }) {
+      return productsShoppingCart
+    },
+    getQuantityItensCart({ productsShoppingCart }) {
+      return productsShoppingCart.length;
     }
   },
   modules: {
