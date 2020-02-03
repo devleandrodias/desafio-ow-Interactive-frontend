@@ -15,6 +15,10 @@ export default new Vuex.Store({
     setProductsShoppingCart({ productsShoppingCart }, payload) {
       productsShoppingCart.push(payload);
     },
+    setUpdateQuantityItens({ productsShoppingCart }, payload) {
+      const { index, value } = payload;
+      productsShoppingCart[index] = { ...productsShoppingCart[index], quantity: value }
+    },
     cleanProductsShoppingCart(state) {
       state.productsShoppingCart = [];
     }
@@ -28,10 +32,12 @@ export default new Vuex.Store({
 
       if (!itemCart)
         commit('setProductsShoppingCart', payload);
-      // this.state.productsShoppingCart[itemCarts.indexOf(itemCart)] = { ...itemCart }
     },
     cleanProductsShoppingCart({ commit }) {
       commit('cleanProductsShoppingCart');
+    },
+    setUpdateQuantityItens({ commit }, payload) {
+      commit('setUpdateQuantityItens', { index: payload.index, value: payload.value });
     }
   },
   getters: {
@@ -51,6 +57,11 @@ export default new Vuex.Store({
       return productsShoppingCart
         .map(p => 1 * p.price)
         .reduce((total, atual) => total + atual, 0);
+    },
+    getQuantityItem({ productsShoppingCart }) {
+      const { quantity } = productsShoppingCart[0]
+
+      return quantity;
     }
   },
   modules: {

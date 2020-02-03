@@ -5,7 +5,9 @@
     <span class="product">{{product}}</span>
     <p class="description">{{description}}</p>
     <span class="price">R${{price}}</span>
-    <button @click="addItensCart(category, product, description, price)">Adicionar ao carrinho</button>
+    <button
+      @click="addItensCart(category, product, description, price, quantity)"
+    >Adicionar ao carrinho</button>
   </div>
 </template>
 
@@ -37,15 +39,21 @@ export default {
       type: String,
       required: true,
       default: "0"
+    },
+    quantity: {
+      type: Number,
+      required: true,
+      default: 1
     }
   },
   computed: {
-    addItensCart({ category, description, price }) {
+    addItensCart({ category, description, price, quantity }) {
       return this.$store.dispatch("setProductsShoppingCart", {
         name: description,
         price,
         picture: "https://i.ibb.co/B4xmk45/1.jpg",
-        category
+        category,
+        quantity
       });
     }
   }
