@@ -6,5 +6,9 @@ Vue.use({
     Vue.prototype.$http = axios.create({
       baseURL: 'https://api.myjson.com/bins/9e9fl'
     });
+
+    Vue.prototype.$httpCep = axios.create({
+      baseURL: 'https://viacep.com.br/ws'
+    });
   }
 })

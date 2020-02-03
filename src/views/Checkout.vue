@@ -1,17 +1,10 @@
 <template>
-  <div class>
-    <form-checkout />
-    <modal-success />
-  </div>
+  <app-address nameButton="Concluir Compra" />
 </template>
 
 <script>
-import FormCheckout from "../components/forms/FormCheckout";
-import ModalSuccess from "../components/widgets/ModalSuccess";
+import appAddress from "../components/forms/Address";
 export default {
-  components: {
-    formCheckout: FormCheckout,
-    modalSuccess: ModalSuccess
-  }
+  components: { appAddress }
 };
 </script>

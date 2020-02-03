@@ -85,8 +85,8 @@
         <span class="clean-cart-text">Limpar carrinho</span>
       </div>
       <div class="buttons-continue-finnaly">
-        <button class="button continue">Continuar comprando</button>
-        <button class="button finnaly">Concluir compra</button>
+        <router-link to="/" exact tag="button" class="button continue">Continuar comprando</router-link>
+        <router-link to="/checkout" exact tag="button" class="button finnaly">Concluir compra</router-link>
       </div>
     </div>
   </div>
