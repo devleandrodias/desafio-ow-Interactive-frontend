@@ -74,7 +74,7 @@
             <input type="text" v-model="user.state" required />
           </div>
         </div>
-        <button @submit.prevent="setShowModal">{{nameButton}}</button>
+        <button @click.prevent="setShowModal">{{nameButton}}</button>
       </div>
     </form>
     <app-modal v-show="isShowModal" />

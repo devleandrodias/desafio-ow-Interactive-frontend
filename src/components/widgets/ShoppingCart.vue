@@ -1,7 +1,7 @@
 <template>
   <div class="shopping-cart">
     <div class="grid">
-      <div class v-if="dataArrayProducts.lenght > 0">
+      <div class v-if="dataArrayProducts.length > 0">
         <table cellspacing="0">
           <thead>
             <tr>
@@ -114,9 +114,6 @@
             {{setPriceItem(product.price)}}
             <div class="category-product">{{product.category}}</div>
             <div class="name-producr">{{product.name}}</div>
-            <div class="image-product">
-              <img :src="product.picture" alt />
-            </div>
             <div class="quantity-itens-product">
               <div class="buttons-calculator">
                 <button

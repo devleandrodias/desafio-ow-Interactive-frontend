@@ -10,7 +10,7 @@
           <a>Produtos</a>
           <div class="circle quantity-item" v-show="quantityItens > 0">{{quantityItens}}</div>
         </router-link>
-        <!-- <img src="../../../assets/shopping-cart.svg" alt="shopping-cart" height="30px" /> -->
+        <!-- <img src="@/assets/shopping-cart.svg" alt="shopping-cart" height="30px" /> -->
       </div>
     </div>
   </header>
