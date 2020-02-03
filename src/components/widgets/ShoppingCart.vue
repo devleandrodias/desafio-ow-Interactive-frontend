@@ -1,5 +1,5 @@
 <template>
-  <div class>
+  <div class v-if="dataArrayProducts.lenght > 0">
     <table cellspacing="0">
       <thead>
         <tr>
@@ -12,8 +12,9 @@
       </thead>
       <tbody>
         <tr v-for="product in dataArrayProducts" :key="product">
+          {{setPriceItem(product.price)}}
           <td>
-            <img src="https://i.ibb.co/B4xmk45/1.jpg" alt="shopping-cart" height="15px" />
+            <!-- <img src="https://i.ibb.co/B4xmk45/1.jpg" alt="shopping-cart" height="15px" /> -->
           </td>
           <td class="product">
             <span class="category">{{product.category}}</span>
@@ -21,15 +22,19 @@
           </td>
           <td>
             <div class="buttons-calculator">
-              <button class="button-more-less button-less" type="button">-</button>
-              <input class="value-total" type="number" value="01" />
-              <button class="button-more-less button-more" type="button">+</button>
+              <button
+                class="button-more-less button-less"
+                type="button"
+                @click="quantityItems > 1 && quantityItems--"
+              >-</button>
+              <input class="value-total" type="number" :value="quantityItems" disabled />
+              <button class="button-more-less button-more" type="button" @click="quantityItems++">+</button>
             </div>
           </td>
           <td class="money">
             <strong>
               R${{
-              sightValueUnit
+              product.price
               }}
             </strong> à vista
             <br />
@@ -60,14 +65,14 @@
             <br />Total Parcelado
           </td>
           <td class="price-total">
-            R${{valueTotal}}
+            R${{getValueTotal}}
             <br />
             <div class="value-parceled">
               em até
               <strong>
                 {{quantityParcel}}x R${{valueTotalParcel}}
                 <br />
-                (Total R${{valueTotal}})
+                (Total R${{getValueTotal}})
               </strong>
             </div>
           </td>
@@ -82,13 +87,18 @@
             height="15px"
             style="cursor: pointer;"
         />-->
-        <span class="clean-cart-text">Limpar carrinho</span>
+
+        <span class="clean-cart-text" @click="cleanProductsShoppingCart()">Limpar carrinho</span>
       </div>
       <div class="buttons-continue-finnaly">
         <router-link to="/" exact tag="button" class="button continue">Continuar comprando</router-link>
         <router-link to="/checkout" exact tag="button" class="button finnaly">Concluir compra</router-link>
       </div>
     </div>
+  </div>
+  <div v-else class="card-empty">
+    <span>Carrinho Vazio</span>
+    <router-link to="/" exact tag="button" class="button finnaly">Continuar comprando</router-link>
   </div>
 </template>
 
@@ -98,6 +108,39 @@ export default {
     dataArrayProducts: {
       type: Array,
       required: true
+    }
+  },
+  data() {
+    return {
+      quantityParcel: 10,
+      quantityItems: 1,
+      priceItem: 0
+    };
+  },
+  methods: {
+    setPriceItem(payload) {
+      const novoValor = payload.replace(".", "").replace(",", ".");
+      this.priceItem = parseFloat(novoValor);
+    }
+  },
+  computed: {
+    parcelValueUnit() {
+      return this.priceItem / this.quantityParcel;
+    },
+    sightValue() {
+      return (this.quantityItems * this.priceItem).toFixed(2);
+    },
+    parcelValue() {
+      return (
+        (this.quantityItems * this.priceItem).toFixed(2) / this.quantityParcel
+      );
+    },
+    getValueTotal() {
+      console.log(this.$store.getters.getValueTotal);
+      return this.$store.getters.getValueTotal;
+    },
+    cleanProductsShoppingCart() {
+      return this.$store.dispatch("cleanProductsShoppingCart");
     }
   }
 };
@@ -126,6 +169,19 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+
+.card-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.card-empty span {
+  padding: 100px;
+  font-size: 1.2em;
 }
 
 .buttons-calculator {
@@ -203,7 +259,7 @@ input[type="number"] {
 }
 
 .category {
-  font-size: 0.8em;
+  font-size: 0.9em;
   font-weight: 700;
   color: #8d36b8;
   padding-bottom: 5px;
@@ -215,7 +271,7 @@ input[type="number"] {
 }
 
 .money {
-  font-size: 0.7em;
+  font-size: 1em;
 }
 
 .button {

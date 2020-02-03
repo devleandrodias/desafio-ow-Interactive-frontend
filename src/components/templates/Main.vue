@@ -13,9 +13,10 @@ export default {};
   main {
     background-color: #fffeff;
     height: 80vh;
-    margin: auto 10%;
+    margin: 15px 10%;
+    overflow-y: auto;
+
     overflow-x: hidden;
-    overflow-y: scroll;
   }
 }
 @media (max-width: 700px) {

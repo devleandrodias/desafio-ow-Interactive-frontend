@@ -8,7 +8,7 @@
       <div class="shopping">
         <router-link to="/cart" exact>
           <a>Produtos</a>
-          <span v-show="quantityItens > 0">{{quantityItens}}</span>
+          <div class="circle quantity-item" v-show="quantityItens > 0">{{quantityItens}}</div>
         </router-link>
         <!-- <img src="../../../assets/shopping-cart.svg" alt="shopping-cart" height="30px" /> -->
       </div>
@@ -36,6 +36,21 @@ header {
   -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.75);
+}
+
+.circle {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: #d33b3b;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-item {
+  color: #fffeff;
 }
 
 a {
@@ -76,6 +91,8 @@ a {
 
 .shopping {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: baseline;
 }
 </style>
