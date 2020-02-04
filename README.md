@@ -1,9 +1,7 @@
 # Desafio OW Interative - Frontend
 
 ## Deploy com CI/CD
-(develeandrodias-owinteractive.netlify.com)
-
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+[develeandrodias-owinteractive.netlify.com](develeandrodias-owinteractive.netlify.com)
 
 ## Project setup
 ```
