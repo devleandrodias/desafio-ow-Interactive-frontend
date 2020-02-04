@@ -16,7 +16,11 @@
             <tr v-for="product in dataArrayProducts" :key="product">
               {{setPriceItem(product.price)}}
               <td>
-                <img src="../../../static/assets/garbage.svg" alt="garbage" />
+                <img
+                  src="../../../static/assets/garbage.svg"
+                  alt="garbage"
+                  @click="removeProductShoppingCart(dataArrayProducts.indexOf(product))"
+                />
               </td>
               <td class="td-itens">
                 <div class="group-itens">
@@ -29,41 +33,47 @@
                   <button
                     class="button-more-less button-less"
                     type="button"
-                    @click="quantityItems > 1 && quantityItems--"
+                    @click="setUpdateQuantityItens(dataArrayProducts.indexOf(product), (product.quantity - 1))"
                   >-</button>
-                  <input class="value-total" type="number" :value="1" disabled />
+                  <input
+                    class="value-total"
+                    type="number"
+                    :value="getQuantityItensByIndex(dataArrayProducts.indexOf(product))"
+                    disabled
+                  />
                   <button
                     class="button-more-less button-more"
                     type="button"
-                    @click="quantityItems++"
+                    @click="setUpdateQuantityItens(dataArrayProducts.indexOf(product), (product.quantity + 1))"
                   >+</button>
                 </div>
               </td>
               <td class="td-itens">
                 <strong>
-                  R$
                   {{
-                  product.price
+                  product.price | money
                   }}
                 </strong> à vista
                 <br />ou
-                <strong>{{quantityParcel}}x R$2.234,25</strong>
-                <!-- {{
-                parcelValueUnit
-                }}-->
+                <strong>
+                  {{quantityParcel}}x {{
+                  parcelValueUnit(product.price) | money
+                  }}
+                </strong>
               </td>
               <td class="td-itens">
                 <strong>
-                  R$12.245,97
-                  <!-- {{
-                  sightValue
-                  }}-->
+                  {{
+                  sightValue(product.quantity, product.price) | money
+                  }}
                 </strong> à vista
                 <br />ou
-                <strong>{{quantityParcel}}x R$1.223,9</strong>
-                <!-- {{
-                parcelValue
-                }}-->
+                <strong>
+                  {{quantityParcel}}x
+                  {{
+                  parcelValue(product.quantity, product.price) | money
+                  }}
+                </strong>
               </td>
             </tr>
           </tbody>
@@ -78,18 +88,15 @@
                 <span class="margin-text">Total Parcelado</span>
               </td>
               <td class="price-total">
-                R$22.234,87
-                <!-- {{getValueTotal}} -->
+                {{totalValue | money}}
                 <br />
                 <div class="value-parceled">
                   em até
                   <strong>
                     {{quantityParcel}}
-                    x R$1.123,34
-                    <!-- {{valueTotalParcel}} -->
-                    <br />(Total R$234,25
-                    <!-- {{getValueTotal}} -->
-                    )
+                    x {{valueTotalParcel() | money}}
+                    <br />
+                    (Total {{totalValue | money}})
                   </strong>
                 </div>
               </td>
@@ -126,7 +133,7 @@
                   type="button"
                   @click="quantityItems > 1 && quantityItems--"
                 >-</button>
-                <input class="value-total" type="number" :value="1" disabled />
+                <input class="value-total" type="number" :value="0" disabled />
                 <button
                   class="button-more-less button-more"
                   type="button"
@@ -144,7 +151,7 @@
             <div class="parceled-value-unit-product">
               <span>
                 Valor parcelado em
-                <strong>10X R${{parcelValueUnit(product.quantity)}}</strong>
+                <strong>10X R${{parcelValueUnit()}}</strong>
               </span>
             </div>Valor Total
             <hr />
@@ -159,7 +166,7 @@
                 Valor total em
                 <strong>
                   10X
-                  R${{parcelValue(product.quantity)}}
+                  {{parcelValue(product.quantity)}}
                 </strong>
               </span>
             </div>
@@ -182,6 +189,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     dataArrayProducts: {
@@ -200,15 +209,15 @@ export default {
       const novoValor = payload.replace(".", "").replace(",", ".");
       this.priceItem = parseFloat(novoValor);
     },
-    parcelValueUnit() {
-      return this.priceItem / this.quantityParcel;
+    parcelValueUnit(price) {
+      return parseFloat(price) / this.quantityParcel;
     },
-    sightValue(payload) {
-      return (payload * this.priceItem).toFixed(2);
+    sightValue(quantityItens, priceItem) {
+      return (parseInt(quantityItens) * priceItem).toFixed(2);
     },
-    parcelValue(payload) {
+    parcelValue(quantityItens, priceItem) {
       return (
-        (parseInt(payload) * this.priceItem).toFixed(2) / this.quantityParcel
+        (parseInt(quantityItens) * priceItem).toFixed(2) / this.quantityParcel
       );
     },
     setUpdateQuantityItens(index, value) {
@@ -217,13 +226,26 @@ export default {
     cleanProductsShoppingCart() {
       return this.$store.dispatch("cleanProductsShoppingCart");
     },
-    getQuantityItem() {
-      return this.$store.getters.getQuantityItem;
+    removeProductShoppingCart(index) {
+      return this.$store.dispatch("removeProductShoppingCart", index);
+    },
+    valueTotalParcel() {
+      return (this.totalValue / this.quantityParcel).toFixed(2);
+    },
+    getQuantityItensByIndex(index) {
+      let array = this.$store.getters.getArray;
+      const { quantity } = array[index];
+      return quantity;
     }
   },
   computed: {
-    getValueTotal() {
-      return this.$store.getters.getValueTotal;
+    ...mapGetters({
+      totalValue: "getValueTotal"
+    })
+  },
+  watch: {
+    setUpdateQuantityItens() {
+      this.getQuantityItensByIndex();
     }
   }
 };
@@ -308,6 +330,7 @@ img {
   padding: 0;
   height: 20px;
   width: 20px;
+  cursor: pointer;
 }
 
 td:first-child {

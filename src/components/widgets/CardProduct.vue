@@ -48,9 +48,11 @@ export default {
   },
   computed: {
     addItensCart({ category, description, price, quantity }) {
+      const priceFloat = price.replace(".", "").replace(",", ".");
+
       return this.$store.dispatch("setProductsShoppingCart", {
         name: description,
-        price,
+        price: parseFloat(priceFloat).toFixed(2),
         picture: "https://i.ibb.co/B4xmk45/1.jpg",
         category,
         quantity

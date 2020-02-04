@@ -21,6 +21,10 @@ export default new Vuex.Store({
     },
     cleanProductsShoppingCart(state) {
       state.productsShoppingCart = [];
+    },
+    removeProductShoppingCart({ productsShoppingCart }, payload) {
+      const { index } = payload;
+      productsShoppingCart.splice(index, 1);
     }
   },
   actions: {
@@ -38,7 +42,10 @@ export default new Vuex.Store({
     },
     setUpdateQuantityItens({ commit }, payload) {
       commit('setUpdateQuantityItens', { index: payload.index, value: payload.value });
-    }
+    },
+    removeProductShoppingCart({ commit }, index) {
+      commit('removeProductShoppingCart', { index })
+    },
   },
   getters: {
     getProducts({ products }) {
@@ -55,13 +62,11 @@ export default new Vuex.Store({
     },
     getValueTotal({ productsShoppingCart }) {
       return productsShoppingCart
-        .map(p => 1 * p.price)
-        .reduce((total, atual) => total + atual, 0);
+        .map(p => p.quantity * p.price)
+        .reduce((total, value) => total + value, 0).toFixed(2);
     },
-    getQuantityItem({ productsShoppingCart }) {
-      const { quantity } = productsShoppingCart[0]
-
-      return quantity;
+    getArray({ productsShoppingCart }) {
+      return productsShoppingCart;
     }
   },
   modules: {

@@ -4,11 +4,11 @@
     <!-- Modal content -->
     <div class="modal-content">
       <span class="close">&times;</span>
-      <img src="../../assets/magnifying-glass.svg" />
+      <img src="../../../static/assets/tick.svg" />
       <p>Seu cadastro foi realizado com sucesso!</p>
       <router-link to="/">
         <a>
-          <p style="marginTop: 15px;">Voltar para home</p>
+          <p style="marginTop: 15px;" @click="cleanProductsShoppingCart">Voltar para home</p>
         </a>
       </router-link>
     </div>
@@ -16,35 +16,37 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    cleanProductsShoppingCart() {
+      return this.$store.dispatch("cleanProductsShoppingCart");
+    }
+  }
+};
 </script>
 
 <style scoped>
-/* The Modal (background) */
 .modal {
-  display: block; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: block;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Modal Content/Box */
 .modal-content {
   border-radius: 15px;
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 25%;
 }
 
-/* The Close Button */
 .close {
   color: #aaa;
   float: right;
@@ -67,5 +69,12 @@ a {
 p {
   font-size: 1.2em;
   text-align: center;
+}
+
+img {
+  height: 150px;
+  width: 100%;
+  text-align: center;
+  padding-top: 0px;
 }
 </style>
