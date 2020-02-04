@@ -2,7 +2,7 @@
 
 > Criar um Front end que faz compra de produtos eletrônicos através de um e-commerce
 
-[Site](https://https://develeandrodias-owinteractive.netlify.com/)
+[Projeto Link](https://https://develeandrodias-owinteractive.netlify.com/)
 
 ## Project setup
 ```
