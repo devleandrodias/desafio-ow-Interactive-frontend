@@ -37,7 +37,8 @@
                   >-</button>
                   <input
                     class="value-total"
-                    type="number"
+                    type="tel"
+                    min="1"
                     :value="getQuantityItensByIndex(dataArrayProducts.indexOf(product))"
                     disabled
                   />
@@ -88,7 +89,7 @@
                 <span class="margin-text">Total Parcelado</span>
               </td>
               <td class="price-total">
-                {{totalValue | money}}
+                {{getValueTotal() | money}}
                 <br />
                 <div class="value-parceled">
                   em até
@@ -96,7 +97,7 @@
                     {{quantityParcel}}
                     x {{valueTotalParcel() | money}}
                     <br />
-                    (Total {{totalValue | money}})
+                    (Total {{getValueTotal() | money}})
                   </strong>
                 </div>
               </td>
@@ -119,78 +120,10 @@
         <router-link to="/" exact tag="button" class="button finnaly">Continuar comprando</router-link>
       </div>
     </div>
-    <div class="mobile">
-      <div class="card-mobile" v-if="dataArrayProducts.length > 0">
-        <div class="card">
-          <div class="product-item" v-for="product in dataArrayProducts" :key="product">
-            {{setPriceItem(product.price)}}
-            <div class="category-product">{{product.category}}</div>
-            <div class="name-product">{{product.name}}</div>
-            <div class="quantity-itens-product">
-              <div class="buttons-calculator">
-                <button
-                  class="button-more-less button-less"
-                  type="button"
-                  @click="quantityItems > 1 && quantityItems--"
-                >-</button>
-                <input class="value-total" type="number" :value="0" disabled />
-                <button
-                  class="button-more-less button-more"
-                  type="button"
-                  @click="setUpdateQuantityItens(dataArrayProducts.indexOf(product), (product.quantity + 1))"
-                >+</button>
-              </div>
-            </div>Valor Unitário
-            <hr />
-            <div class="sight-value-unit-product">
-              <span>
-                Valor a vista
-                <strong>R${{product.price}}</strong>
-              </span>
-            </div>
-            <div class="parceled-value-unit-product">
-              <span>
-                Valor parcelado em
-                <strong>10X R${{parcelValueUnit()}}</strong>
-              </span>
-            </div>Valor Total
-            <hr />
-            <div class="sight-value-total-product">
-              <span>
-                Valor total a vista
-                <strong>R${{sightValue(product.quantity)}}</strong>
-              </span>
-            </div>
-            <div class="parceled-value-total-product">
-              <span>
-                Valor total em
-                <strong>
-                  10X
-                  {{parcelValue(product.quantity)}}
-                </strong>
-              </span>
-            </div>
-          </div>
-          <div class="sight-value-total-products">Valor total da compra</div>
-          <div class="parceled-value-total-products">Valor total da compra parcelado</div>
-        </div>
-        <div class="buttons-continue-finnaly">
-          <button class="button continue" @click="cleanProductsShoppingCart()">Limpar carrinho</button>
-          <router-link to="/" exact tag="button" class="button continue">Continuar comprando</router-link>
-          <router-link to="/checkout" exact tag="button" class="button finnaly">Concluir compra</router-link>
-        </div>
-      </div>
-      <div class="card-empty" v-else>
-        <span>Carrinho Vazio</span>
-        <router-link to="/" exact tag="button" class="button finnaly">Continuar comprando</router-link>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   props: {
     dataArrayProducts: {
@@ -230,31 +163,41 @@ export default {
       return this.$store.dispatch("removeProductShoppingCart", index);
     },
     valueTotalParcel() {
-      return (this.totalValue / this.quantityParcel).toFixed(2);
+      const array = this.$store.getters.getArray;
+
+      return (
+        array
+          .map(p => p.quantity * p.price)
+          .reduce((total, value) => total + value, 0)
+          .toFixed(2) / this.quantityParcel
+      );
     },
     getQuantityItensByIndex(index) {
       let array = this.$store.getters.getArray;
       const { quantity } = array[index];
       return quantity;
-    }
-  },
-  computed: {
-    ...mapGetters({
-      totalValue: "getValueTotal"
-    })
-  },
-  watch: {
-    setUpdateQuantityItens() {
-      this.getQuantityItensByIndex();
+    },
+    getValueTotal() {
+      const array = this.$store.getters.getArray;
+
+      return array
+        .map(p => p.quantity * p.price)
+        .reduce((total, value) => total + value, 0)
+        .toFixed(2);
+    },
+    getValueTotalParcel() {
+      const array = this.$store.getters.getArray;
+
+      return array
+        .map(p => p.quantity * p.price)
+        .reduce((total, value) => total + value, 0)
+        .toFixed(2);
     }
   }
 };
 </script>
 
 <style scoped>
-/**
-  Mobile 
- */
 .card {
   background-color: #fffeff;
   padding: 10px;
@@ -296,22 +239,6 @@ strong {
 
 hr {
   border: 0.5px solid #cfcfcf;
-}
-
-/**
-  Grid
-  */
-
-@media (min-width: 700px) {
-  .mobile {
-    display: none;
-  }
-}
-
-@media (max-width: 700px) {
-  .grid {
-    display: none;
-  }
 }
 
 table {
