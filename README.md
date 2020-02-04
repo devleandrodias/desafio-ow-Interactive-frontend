@@ -1,7 +1,7 @@
 # Desafio OW Interative - Frontend
 
 ## Deploy com CI/CD
-*develeandrodias-owinteractive.netlify.com*
+(develeandrodias-owinteractive.netlify.com)
 
 ## Project setup
 ```
