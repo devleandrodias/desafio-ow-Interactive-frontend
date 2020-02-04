@@ -1,9 +1,7 @@
 <template>
-  <!-- The Modal -->
-  <div id="myModal" class="modal">
-    <!-- Modal content -->
+  <div id="myModal" class="modal" v-if="isShowModal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close" @click="isShowModal = !isShowModal">&times;</span>
       <img src="../../../static/assets/tick.svg" />
       <p>Seu cadastro foi realizado com sucesso!</p>
       <router-link to="/">
@@ -20,6 +18,13 @@ export default {
   methods: {
     cleanProductsShoppingCart() {
       return this.$store.dispatch("cleanProductsShoppingCart");
+    }
+  },
+  props: {
+    isShowModal: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   }
 };

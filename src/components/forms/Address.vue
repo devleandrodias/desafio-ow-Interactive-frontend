@@ -74,10 +74,10 @@
             <input type="text" v-model="user.state" required />
           </div>
         </div>
-        <button @click.prevent="setShowModal">{{nameButton}}</button>
+        <button @click.prevent="isShowModal = !isShowModal">{{nameButton}}</button>
       </div>
     </form>
-    <app-modal v-show="isShowModal" />
+    <app-modal :isShowModal="isShowModal" />
   </div>
 </template>
 
@@ -127,9 +127,6 @@ export default {
       this.user.neighborhood = bairro;
       this.user.city = localidade;
       this.user.state = uf;
-    },
-    setShowModal() {
-      this.isShowModal = true;
     }
   },
   directives: { mask }
