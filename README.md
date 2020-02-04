@@ -3,6 +3,8 @@
 ## Deploy com CI/CD
 (develeandrodias-owinteractive.netlify.com)
 
+[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+
 ## Project setup
 ```
 yarn install
