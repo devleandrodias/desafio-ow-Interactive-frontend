@@ -1,7 +1,8 @@
 # Desafio OW Interative - Frontend
 
-## Deploy com CI/CD
-[https://develeandrodias-owinteractive.netlify.com]: (https://develeandrodias-owinteractive.netlify.com)
+> Criar um Front end que faz compra de produtos eletrônicos através de um e-commerce
+
+[Site](https://https://develeandrodias-owinteractive.netlify.com/)
 
 ## Project setup
 ```
